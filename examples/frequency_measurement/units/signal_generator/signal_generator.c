@@ -33,6 +33,11 @@ void nexus_read_shared_memory(){
     requested_amplitude = nexus_pt->requested_amplitude;
     requested_frequency = nexus_pt->requested_frequency;
 }
+
+void nexus_finished(void){
+    printf("\n\nSimulation finished.\n");
+    while(1);
+}
 #ifdef __cplusplus
 }
 #endif

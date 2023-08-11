@@ -34,6 +34,11 @@ void nexus_write_shared_memory(void){
 void nexus_read_shared_memory(void){
     input_signal = nexus_pt->generated_signal;
 }
+
+void nexus_finished(void){
+    printf("\n\nSimulation finished.\n");
+    while(1);
+}
 #ifdef __cplusplus
 }
 #endif
