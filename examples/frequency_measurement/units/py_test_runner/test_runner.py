@@ -81,6 +81,9 @@ def test_case():
     #Print status
     report_status(unit, signals_to_report, t)
     
+    #Sync till end
+    t = 1
+    unit.sync(t)
     input("Press enter to finish...")
     
     

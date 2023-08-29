@@ -11,6 +11,7 @@
 */
 #include "nexus.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 #define PROCESS_SLOT (1)
@@ -36,8 +37,9 @@ void nexus_read_shared_memory(void){
 }
 
 void nexus_finished(void){
-    printf("\n\nSimulation finished.\n");
-    while(1);
+    printf("\n\nSimulation finished, press Enter to exit...");
+    getchar();
+    exit(0);
 }
 #ifdef __cplusplus
 }

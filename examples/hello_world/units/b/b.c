@@ -11,6 +11,7 @@
 */
 #include "nexus.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 #define PROCESS_SLOT (1)
 
@@ -34,6 +35,12 @@ void nexus_read_shared_memory(int argc, char *argv[]){
     a_signal_0 = nexus_pt->a.signal_0;
     a_signal_1 = nexus_pt->a.signal_1;
 }
+
+void nexus_finished(void){
+    printf("Press Enter to exit...");
+    getchar();
+    exit(0);
+}
 #ifdef __cplusplus
 }
 #endif
@@ -44,6 +51,7 @@ int main(int argc, char *argv[]) {
                             nexus_shared_id);     
     if(result != 0) return result;
     
+	printf("nexus_pt %p", nexus_pt);
     printf("Read from other process: \na.signal_0: %f\na.signal_1:  %f\n", a_signal_0, a_signal_1);
     printf("Local time: %f\n", t);
     printf("\n\n");

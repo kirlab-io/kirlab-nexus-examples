@@ -36,6 +36,11 @@ void nexus_read_shared_memory(int argc, char *argv[]){
 	v_out = nexus_pt->plant.v_out;
 	i_out = nexus_pt->plant.i_out;
 }
+
+void nexus_finished(void){
+    printf("Simulation finished");
+    exit(0);
+}
 #ifdef __cplusplus
 }
 #endif
