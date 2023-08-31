@@ -11,7 +11,7 @@
 */
 #include "nexus.h"
 
-#define PROCESS_SLOT (0)
+#define PROCESS_SLOT (1)
 
 double t;
 double period = 10e-6;
