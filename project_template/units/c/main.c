@@ -38,7 +38,7 @@ void nexus_read_shared_memory(int argc, char *argv[]){
 int main(int argc, char *argv[]) {
     
 	int result = nexus_init(PROCESS_SLOT,
-                            nexus_shared_id); 
+                            NEXUS_SHARED_ID); 
 
 	if(result != 0) return result;
 	

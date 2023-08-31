@@ -9,8 +9,9 @@
 * Please see the EULA.txt file for the full license text.
 =========================================================================
 */
-#include "nexus.h"
-#include "nexus_uC.h"
+#include <nexus_com.h>
+#include <nexus_uC.h>
+#include <nexus.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "application.h"
@@ -49,6 +50,7 @@ void nexus_finished(void){
 
 
 int main(int argc, char *argv[]) {
+
 	int result = nexus_init(nexus_uC_slot,
 							NEXUS_SHARED_ID);
 	if(result != 0)

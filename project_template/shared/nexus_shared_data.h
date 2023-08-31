@@ -9,10 +9,10 @@
 =========================================================================
 */
  
-#ifndef _NEXUS_HEADERS_H_
-#define _NEXUS_HEADERS_H_
+#ifndef _NEXUS_SHARED_DATA_H_
+#define _NEXUS_SHARED_DATA_H_
 
-const char * nexus_shared_id = "SAMPLE_PROJECT";
+static const char * NEXUS_SHARED_ID = "SAMPLE_PROJECT";
 
 typedef struct{
     volatile double signal_0;

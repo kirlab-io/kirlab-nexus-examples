@@ -9,14 +9,20 @@
 * Please see the EULA.txt file for the full license text.
 =========================================================================
 */
- 
+
+#include "nexus_com.h"
 #include "nexus.h"
+
+
 
 /*in and out from nexus*/
 extern double * in;
 extern double * out;
 
 /*Exported values*/
+const char * nexus_get_shared_id(void){
+	return NEXUS_SHARED_ID;
+}
 const int nexus_process_slot = 0;
 const int in_size = 4;
 const int out_size = 2;

@@ -17,6 +17,9 @@ extern double * in;
 extern double * out;
 
 /*Exported values*/
+const char * nexus_get_shared_id(void){
+	return NEXUS_SHARED_ID;
+}
 const int nexus_process_slot = 1;
 const int in_size = 2;
 const int out_size = 2;

@@ -80,7 +80,7 @@ void meter(double signal, double *frequency, double *amplitude, double step) {
 int main(int argc, char *argv[]) {
     
     int result = nexus_init(PROCESS_SLOT,
-                            nexus_shared_id);     
+                            NEXUS_SHARED_ID);     
     if(result != 0) return result;
     
     printf("Meter\n");

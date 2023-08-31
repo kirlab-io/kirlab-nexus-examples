@@ -53,7 +53,7 @@ double sine_wave(double time, double frequency, double amplitude){
 int main(int argc, char *argv[]) {
     
     int result = nexus_init(PROCESS_SLOT,
-                            nexus_shared_id); 
+                            NEXUS_SHARED_ID); 
     if(result != 0) return result;
  
     printf("Generator\n");
