@@ -10,40 +10,37 @@
 =========================================================================
 */
 
-#include "nexus_com.h"
 #include "nexus.h"
-
-
 
 /*in and out from nexus*/
 extern double * in;
 extern double * out;
 
 /*Exported values*/
-const char * nexus_get_shared_id(void){
+const char * get_shared_id(void){
 	return NEXUS_SHARED_ID;
 }
-const int nexus_process_slot = 0;
+const int unit_slot = 0;
 const int in_size = 4;
 const int out_size = 2;
 
 /*Exported functions*/
-void nexus_write_shared_memory(void){
+void write_data(void){
     nexus_pt->plant.v_in= in[0];
     nexus_pt->plant.i_in= in[1];
     nexus_pt->plant.v_out= in[2];
     nexus_pt->plant.i_out= in[3];
 }
 	
-void nexus_read_shared_memory(void){
+void read_data(void){
     out[0] = nexus_pt->controller.period;
     out[1] = nexus_pt->controller.duty_cycle;
 }
 
-void nexus_finished(void){
+void finished(void){
 	//nothing to do, let the program run
 }
 
-void nexus_user_processing(void){
+void processing(void){
 	//Do some extra processing...
 }

@@ -1,6 +1,6 @@
 LIB ?= $(KLNEXUS_PATH)/lib
 SHARED ?= ../../shared
-UNIT_NAME ?= app
+UNIT_NAME ?= b
 
 build: clean $(UNIT_NAME).exe clean_artifacts
 

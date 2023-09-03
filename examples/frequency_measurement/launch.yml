@@ -1,0 +1,12 @@
+- alias: klnexus
+  command: klnexus.exe .\config.ini
+  enabled: true
+- alias: meter
+  command: .\units\meter\meter.exe
+  enabled: true
+- alias: signal generator
+  command: .\units\signal_generator\signal_generator.exe
+  enabled: true
+- alias: python supervisor
+  command: py .\units\py_supervisor\supervisor.py
+  enabled: true

@@ -1,0 +1,9 @@
+- alias: klnexus
+  command: klnexus.exe .\config.ini
+  enabled: true
+- alias: Controller
+  command: .\units\uC_eclipse\Debug\uC_eclipse_c.exe
+  enabled: true
+- alias: Power Simulation
+  command: not supported by cmd line
+  enabled: false

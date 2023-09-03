@@ -84,7 +84,7 @@ def test_case():
     #Sync till end
     t = 1
     unit.sync(t)
-    input("Press enter to finish...")
+    print("Simulation finished.")
     
     
 

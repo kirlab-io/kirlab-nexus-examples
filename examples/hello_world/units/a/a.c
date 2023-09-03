@@ -15,49 +15,54 @@
 
 #define PROCESS_SLOT (0)
 
+/*Local process time*/
 double t;
 double period = 10e-6;
 
+
+/*Local buffer of shared values*/
 double a_signal_0 = 1000.0;
 double a_signal_1 = 2000.0;
 double b_signal_0;
 double b_signal_1;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void nexus_write_shared_memory(void){
+
+/*Nexus callbacks*/
+void write_data(void){
 	nexus_pt->a.signal_0 = a_signal_0;
 	nexus_pt->a.signal_1 = a_signal_1;
 }
 
-void nexus_read_shared_memory(int argc, char *argv[]){
+void read_data(void){
 	b_signal_0 = nexus_pt->b.signal_0;
 	b_signal_1 = nexus_pt->b.signal_1;
 }
 
-void nexus_finished(void){
-    printf("Press Enter to exit...");
-    getchar();
+void simulation_finished(void){
+    printf("\n\nSimulation finished.\n");
     exit(0);
 }
-#ifdef __cplusplus
-}
-#endif
+
+
 
 int main(int argc, char *argv[]) {
     
+	/*Nexus initialization*/
     int result = nexus_init(PROCESS_SLOT,
                             NEXUS_SHARED_ID); 
 	
     if(result != 0) return result;
+	
+	nexus_set_read_callback(&read_data);
+	nexus_set_write_callback(&write_data);
+	nexus_set_finished_callback(&simulation_finished);
     
-	printf("nexus_pt %p", nexus_pt);
 	
     printf("Read from other process: \nb.signal_0: %f\nb.signal_1:  %f\n", b_signal_0, b_signal_1);
     printf("Local time: %f\n", t);
     printf("\n\n");
     
+	
     while(1){
         t = t+period;
         nexus_sync(t);

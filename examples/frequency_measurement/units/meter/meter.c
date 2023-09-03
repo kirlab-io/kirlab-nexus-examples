@@ -16,37 +16,35 @@
 
 #define PROCESS_SLOT (1)
 
+/*Local process time*/
 double t;
 double period = 10e-6;
 
+
+/*Local buffer of shared values*/
 double input_signal;
 
 double measured_frequency;
 double measured_amplitude;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void nexus_write_shared_memory(void){
+
+/*Nexus callbacks*/
+void write_data(void){
     nexus_pt->measured_frequency = measured_frequency;
     nexus_pt->measured_amplitude = measured_amplitude;
 }
 
-void nexus_read_shared_memory(void){
+void read_data(void){
     input_signal = nexus_pt->generated_signal;
 }
 
-void nexus_finished(void){
-    printf("\n\nSimulation finished, press Enter to exit...");
-    getchar();
+void simulation_finished(void){
+    printf("\n\nSimulation finished.\n");
     exit(0);
 }
-#ifdef __cplusplus
-}
-#endif
 
 
-
+/*Local application*/
 double previous_value = 0;
 double last_time_since_zero_crossing = 0;
 double time_since_zero_crossing = 0;
@@ -77,12 +75,20 @@ void meter(double signal, double *frequency, double *amplitude, double step) {
 }
 
 
+
 int main(int argc, char *argv[]) {
     
+	/*Nexus initialization*/
     int result = nexus_init(PROCESS_SLOT,
                             NEXUS_SHARED_ID);     
     if(result != 0) return result;
+	
+	nexus_set_read_callback(&read_data);
+	nexus_set_write_callback(&write_data);
+	nexus_set_finished_callback(&simulation_finished);
     
+	
+	
     printf("Meter\n");
     while(1){
         

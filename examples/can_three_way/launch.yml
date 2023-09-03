@@ -1,0 +1,12 @@
+- alias: klnexus
+  command: klnexus.exe .\config.ini
+  enabled: true
+- alias: process A
+  command: .\units\processA\a.exe
+  enabled: true
+- alias: process B
+  command: .\units\processB\b.exe
+  enabled: true
+- alias: process C python
+  command: py .\units\processCpy\c.py
+  enabled: true

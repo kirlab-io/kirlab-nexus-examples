@@ -28,4 +28,6 @@ void send_can_message(uint32_t id, const char * data);
 
 bool read_can_message(uint32_t * id, char * data);
 
+bool can_messages_available(void);
+
 #endif /* HARDWARE_H_ */

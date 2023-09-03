@@ -1,0 +1,9 @@
+- alias: klnexus
+  command: klnexus .\config.ini
+  enabled: true
+- alias: unit a
+  command: .\units\a\a.exe
+  enabled: true
+- alias: unit b
+  command: .\units\b\b.exe
+  enabled: true

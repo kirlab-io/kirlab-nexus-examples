@@ -14,7 +14,7 @@
 #include "hardware.h"
 
 
-//Local buffers for shared data
+/*Local buffers for shared data*/
 double period = 10e-6;
 double duty_cycle = 0.0;
 
@@ -24,7 +24,7 @@ double i_in;
 double i_out;
 
 
-//Application data
+/*Application code*/
 long long unsigned int isr_cnt = 0;
 static const double Kp = 0.01;
 static const double Ki = 0.0001;
@@ -45,13 +45,16 @@ double PI(double error, double min, double max){
 }
 
 void application_init(void){
+	/*Initialize app variables*/
 	i_acc = 0.0;
 	setpoint = 0.0;
+
+	/*Initialize hardware abstraction layer*/
 	configure_hardware();
 }
 
 void application_background_loop(void){
-    //Play with the setpoint over time
+    /*Play with the setpoint over time*/
     if(isr_cnt<2000){
         setpoint = 4.0;
     } else if(isr_cnt<6000){
@@ -62,8 +65,8 @@ void application_background_loop(void){
 }
 
 void application_timer_isr(void){
-	//PI every switching period
+	/*PI every switching cycle*/
 	duty_cycle = PI((setpoint-v_out), 0.0, 0.9);
-	//Increment os tick counter
+	/*Increment os tick counter*/
 	isr_cnt++;
 }

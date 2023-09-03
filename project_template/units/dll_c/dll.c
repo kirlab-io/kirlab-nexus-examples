@@ -20,21 +20,20 @@ extern double * out;
 const char * nexus_get_shared_id(void){
 	return NEXUS_SHARED_ID;
 }
-const int nexus_process_slot = 1;
+const int unit_slot = 1;
 const int in_size = 2;
 const int out_size = 2;
 
 /*Exported functions*/
-void nexus_write_shared_memory(void){
+void write_data(void){
     nexus_pt->a.signal_0 = in[0];
     nexus_pt->a.signal_1 = in[1];
 }
 	
-void nexus_read_shared_memory(void){
-    out[0] = nexus_pt->b.signal_0;
-    out[1] = nexus_pt->b.signal_1;
+void finished(void){
+	//nothing to do, let the program run
 }
 
-void nexus_user_processing(void){
+void processing(void){
 	//Do some extra processing...
 }

@@ -23,11 +23,7 @@ except ImportError:
 def test_case():
     unit = Unit(shared_header_path="..\\..\\shared\\nexus_shared_data.h",
                  slot=0,
-                 dll_path=None)
-    # Test the init function
-    process_slot = 1
-    shared_id = "SAMPLE_PROJECT"
-        
+                 dll_path=None)         
     
     # Test the sync function to 1ms
     sync_result = unit.sync(0.001)

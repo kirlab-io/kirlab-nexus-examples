@@ -17,6 +17,7 @@
 void * timer0;
 
 void create_hardware(void){
+	(void)NEXUS_SHARED_ID;//remove warning
 	timer0 = nexus_uC_timer_create();
 }
 

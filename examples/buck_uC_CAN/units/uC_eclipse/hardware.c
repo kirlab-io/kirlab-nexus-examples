@@ -23,6 +23,7 @@
 void * timer0;
 
 void create_hardware(void){
+	(void)NEXUS_SHARED_ID;//remove warning
 	timer0 = nexus_uC_timer_create();
 	nexus_can_init(CAN_ADAPTER);
 	nexus_can_connect(CAN_ADAPTER, CAN_BUS);
@@ -44,4 +45,8 @@ bool read_can_message(uint32_t * id, char * data){
 	int size;
 	bool result = nexus_can_receive(CAN_ADAPTER, id, data, &size);
 	return result;
+}
+
+bool can_messages_available(void){
+	return nexus_can_frames_available(CAN_ADAPTER);
 }

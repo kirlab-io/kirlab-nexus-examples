@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 
-//Local buffers for shared data
+/*Local buffers for shared data*/
 double period = 10e-6;
 double duty_cycle = 0.0;
 
@@ -25,7 +25,8 @@ double i_in;
 double i_out;
 
 
-//Application data
+
+/*Application code*/
 long long unsigned int isr_cnt = 0;
 static const double Kp = 0.01;
 static const double Ki = 0.0001;
@@ -46,15 +47,21 @@ double PI(double error, double min, double max){
 }
 
 void application_init(void){
+	/*Initialize app variables*/
 	i_acc = 0.0;
 	setpoint = 0.0;
+
+	/*Initialize hardware abstraction layer*/
 	configure_hardware();
 }
 
 void application_background_loop(void){
+
+	/*Just read CAN messages and update the setpoint*/
     uint32_t id;
     char data[8];
-    while(read_can_message(&id, data)){
+    while(can_messages_available()){
+		read_can_message(&id, data);
     	uint64_t fixed_comma_setpoint= *((uint64_t *)data);
     	setpoint = ((double)fixed_comma_setpoint)/(0x100000000);
     	printf("<-- id: %x   isr_cnt:%d\n", id, (int)isr_cnt);
@@ -63,11 +70,14 @@ void application_background_loop(void){
 }
 
 void application_timer_isr(void){
-	//PI every switching period
+
+	/*PI every switching cycle*/
 	duty_cycle = PI((setpoint-v_out), 0.0, 0.9);
-	//Increment os tick counter
+
+	/*Increment os tick counter*/
 	isr_cnt++;
 
+	/*Report status to CAN*/
 	uint32_t id = 0xCAFE;
 	uint64_t * data = (uint64_t *)&v_out;
 	if(isr_cnt %10 == 0){

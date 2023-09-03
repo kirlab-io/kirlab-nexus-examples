@@ -1,0 +1,15 @@
+- alias: klnexus
+  command: klnexus.exe .\config.ini
+  enabled: true
+- alias: Controller
+  command: .\units\uC_eclipse\Debug\uC_eclipse.exe
+  enabled: false
+- alias: Python supervisor
+  command: py .\units\py_supervisor\supervisor.py
+  enabled: true
+- alias: NL5 Simulation
+  command: echo "NL5 not supported by cmd line"
+  enabled: false
+- alias: PSim Simulation
+  command: ping google.com && echo "PSim is supported, check your installation"
+  enabled: false

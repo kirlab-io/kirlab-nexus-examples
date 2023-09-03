@@ -17,53 +17,64 @@
 #include "application.h"
 #include "hardware.h"
 
-//Nexus vars
+/*Local process time*/
 double dt = 1e-6;
 double unit_t = 0.0;
+
+/*Slot*/
 int nexus_uC_slot = 1;
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void nexus_write_shared_memory(void){
+/*Nexus callbacks*/
+void write_data(void){
 	nexus_pt->controller.period = period;
 	nexus_pt->controller.duty_cycle = duty_cycle;
 }
 
-void nexus_read_shared_memory(int argc, char *argv[]){
+void read_data(void){
 	v_in = nexus_pt->plant.v_in;
 	i_in = nexus_pt->plant.i_in;
 	v_out = nexus_pt->plant.v_out;
 	i_out = nexus_pt->plant.i_out;
 }
 
-void nexus_finished(void){
-    printf("Simulation finished");
+void simulation_finished(void){
+    printf("\n\nSimulation finished.\n");
     exit(0);
 }
-#ifdef __cplusplus
-}
-#endif
-
 
 
 
 int main(int argc, char *argv[]) {
 
+	/*Initialize nexus*/
 	int result = nexus_init(nexus_uC_slot,
 							NEXUS_SHARED_ID);
 	if(result != 0)
 		return result;
+	nexus_set_read_callback(&read_data);
+	nexus_set_write_callback(&write_data);
+	nexus_set_finished_callback(&simulation_finished);
 	
+
+	/*Initialize the uC*/
 	nexus_uC_init();
 	create_hardware();
+
+	/*Finally initialize the user application*/
 	application_init();
 
+	/*Loop forever*/
 	while(1){
+
+		/*Update the uC*/
 		unit_t += dt;
 		nexus_uC_step(unit_t);
+
+		/*Call the application background loop*/
 		application_background_loop();
+
+		/*Sync*/
 		nexus_sync(unit_t);
 	}
 	
