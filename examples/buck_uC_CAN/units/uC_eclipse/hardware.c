@@ -30,13 +30,6 @@ void create_hardware(void){
 }
 
 
-void configure_hardware(void){
-	nexus_uC_timer_set_limit(timer0, 10e-6);
-	nexus_uC_timer_set_callback(timer0, &application_timer_isr);
-	nexus_uC_timer_enable(timer0, true);
-	nexus_uC_timer_int_enable(timer0, true);
-}
-
 void send_can_message(uint32_t id, const char * data){
 	nexus_can_send(CAN_ADAPTER, id, data, 8);
 }

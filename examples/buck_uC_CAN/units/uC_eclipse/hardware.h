@@ -20,10 +20,6 @@ extern void * timer0;
 
 void create_hardware(void);
 
-void configure_hardware(void);
-
-
-
 void send_can_message(uint32_t id, const char * data);
 
 bool read_can_message(uint32_t * id, char * data);

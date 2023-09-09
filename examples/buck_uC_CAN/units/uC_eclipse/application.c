@@ -12,6 +12,7 @@
 
 #include "application.h"
 #include "hardware.h"
+#include <nexus_uC.h>
 #include <stdio.h>
 
 
@@ -27,24 +28,19 @@ double i_out;
 
 
 /*Application code*/
+
+
 long long unsigned int isr_cnt = 0;
 static const double Kp = 0.01;
 static const double Ki = 0.0001;
 static double i_acc;
 static double setpoint;
 
-double PI(double error, double min, double max){
-	double new_iacc = i_acc + error*Ki;
-	double out = error*Kp + new_iacc;
-	if(out < min){
-		out = min;
-	} else if(out > max){
-		out = max;
-	} else {
-		i_acc = new_iacc;
-	}
-	return out;
-}
+void configure_hardware(void);
+
+void timer_isr(void);
+
+double PI(double error, double min, double max);
 
 void application_init(void){
 	/*Initialize app variables*/
@@ -69,7 +65,27 @@ void application_background_loop(void){
     }
 }
 
-void application_timer_isr(void){
+double PI(double error, double min, double max){
+	double new_iacc = i_acc + error*Ki;
+	double out = error*Kp + new_iacc;
+	if(out < min){
+		out = min;
+	} else if(out > max){
+		out = max;
+	} else {
+		i_acc = new_iacc;
+	}
+	return out;
+}
+
+void configure_hardware(void){
+	nexus_uC_timer_set_limit(timer0, 10e-6);
+	nexus_uC_timer_add_interrupt_callback(timer0, &timer_isr);
+	nexus_uC_timer_enable(timer0, true);
+	nexus_uC_timer_enable_interrupt(timer0, true);
+}
+
+void timer_isr(void){
 
 	/*PI every switching cycle*/
 	duty_cycle = PI((setpoint-v_out), 0.0, 0.9);
