@@ -13,7 +13,7 @@
 #include "hardware.h"
 #include "application.h"
 #include <stdbool.h>
-#include <nexus_com.h>
+#include <nexus_comm.h>
 #include <nexus_uC.h>
 #include <nexus.h>
 

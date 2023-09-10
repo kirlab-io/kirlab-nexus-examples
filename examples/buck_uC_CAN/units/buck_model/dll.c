@@ -9,7 +9,7 @@
 * Please see the EULA.txt file for the full license text.
 =========================================================================
 */
-#include "nexus_com.h"
+#include "nexus_comm.h"
 #include "nexus.h"
 
 
