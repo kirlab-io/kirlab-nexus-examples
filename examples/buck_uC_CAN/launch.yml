@@ -11,5 +11,5 @@
   command: echo "NL5 not supported by cmd line"
   enabled: false
 - alias: PSim Simulation
-  command: ping google.com && echo "PSim is supported, check your installation"
+  command: echo "PSim is supported, check your installation"
   enabled: false

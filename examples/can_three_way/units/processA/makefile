@@ -5,7 +5,7 @@ UNIT_NAME ?= a
 build: clean $(UNIT_NAME).exe clean_artifacts
 
 $(UNIT_NAME).exe: $(UNIT_NAME).o
-	gcc $(UNIT_NAME).o -L$(LIB) -lnexus -lnexuscom -o $(UNIT_NAME).exe
+	gcc $(UNIT_NAME).o -L$(LIB) -lnexus -lnexuscomm -o $(UNIT_NAME).exe
 
 $(UNIT_NAME).o: $(UNIT_NAME).c
 	gcc -I$(LIB) -I$(SHARED) -c $(UNIT_NAME).c -o $(UNIT_NAME).o
