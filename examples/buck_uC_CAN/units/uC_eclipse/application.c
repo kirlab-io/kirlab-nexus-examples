@@ -38,7 +38,7 @@ static double setpoint;
 
 void configure_hardware(void);
 
-void timer_isr(void);
+void timer_isr(void * arg);
 
 double PI(double error, double min, double max);
 
@@ -80,12 +80,12 @@ double PI(double error, double min, double max){
 
 void configure_hardware(void){
 	nexus_uC_timer_set_period(timer0, 10e-6);
-	nexus_uC_timer_add_interrupt_callback(timer0, &timer_isr);
+	nexus_uC_timer_add_interrupt_callback(timer0, nexus_uC_callback(&timer_isr, NULL));
 	nexus_uC_timer_enable(timer0, true);
 	nexus_uC_timer_enable_interrupt(timer0, true);
 }
 
-void timer_isr(void){
+void timer_isr(void * arg){
 
 	/*PI every switching cycle*/
 	duty_cycle = PI((setpoint-v_out), 0.0, 0.9);
