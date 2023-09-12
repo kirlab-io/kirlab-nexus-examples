@@ -11,7 +11,7 @@
 */
 
 #include "nexus_uC.h"
-#include "nexus_uC_pwm_dst.h"
+#include "nexus_uC_pwm_aux.h"
 #include "nexus.h"
 
 /*time*/
@@ -33,14 +33,14 @@ const int out_size = 1;
 /*local data*/
 void * pwms[1];
 
-void * nexus_uC_pwm_dst_create(void);
+void * nexus_uC_pwm_aux_create(void);
 
 /*Callbacks*/
 void init(void){
 	for(int i=0; i<sizeof(pwms)/sizeof(pwms[0]); i++){
-        pwms[i] = nexus_uC_pwm_dst_create();
-        nexus_uC_pwm_dst_set_shared_object(pwms[i], (void *)&nexus_pt->pwm_links[i]);
-        nexus_uC_pwm_dst_set_all_pwms(pwms[i], pwms, sizeof(pwms)/sizeof(pwms[0]));
+        pwms[i] = nexus_uC_pwm_aux_create();
+        nexus_uC_pwm_aux_set_shared_object(pwms[i], (void *)&nexus_pt->pwm_links[i]);
+        nexus_uC_pwm_aux_set_all_pwms(pwms[i], pwms, sizeof(pwms)/sizeof(pwms[0]));
     }
 }
 
@@ -53,7 +53,7 @@ void write_data(void){
 	
 void read_data(void){
 	for(int i=0; i<sizeof(pwms)/sizeof(pwms[0]); i++)
-		nexus_uC_pwm_dst_load_shared(pwms[i]);
+		nexus_uC_pwm_aux_load_shared(pwms[i]);
 	
 }
 
@@ -63,6 +63,6 @@ void finished(void){
 
 void processing(void){
 	for(int i=0; i<sizeof(pwms)/sizeof(pwms[0]); i++)
-		nexus_uC_pwm_dst_update(pwms[i], simulation_t, step_dt);
-	out[0] = nexus_uC_pwm_dst_get_output(pwms[0])-1.0;
+		nexus_uC_pwm_aux_update(pwms[i], simulation_t, step_dt);
+	out[0] = nexus_uC_pwm_aux_get_output(pwms[0])-1.0;
 }
