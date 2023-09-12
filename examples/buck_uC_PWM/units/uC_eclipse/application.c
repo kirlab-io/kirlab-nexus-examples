@@ -10,10 +10,10 @@
 =========================================================================
 */
 
+#include <stdbool.h>
 #include "application.h"
 #include "hardware.h"
 #include <nexus_uC.h>
-#include <stdio.h>
 
 
 /*Local buffers for shared data*/
@@ -26,21 +26,22 @@ double i_in;
 double i_out;
 
 
-
 /*Application code*/
+void configure_hardware(void);
+
+void timer_isr(void);
+
+void pwm_isr(void);
+
+double PI(double error, double min, double max);
 
 
 long long unsigned int isr_cnt = 0;
+long long unsigned int pwm_isr_cnt = 0;
 static const double Kp = 0.01;
 static const double Ki = 0.0001;
 static double i_acc;
 static double setpoint;
-
-void configure_hardware(void);
-
-void timer_isr(void * arg);
-
-double PI(double error, double min, double max);
 
 void application_init(void){
 	/*Initialize app variables*/
@@ -52,16 +53,15 @@ void application_init(void){
 }
 
 void application_background_loop(void){
-
-	/*Just read CAN messages and update the setpoint*/
-    uint32_t id;
-    char data[8];
-    while(can_messages_available()){
-		read_can_message(&id, data);
-    	uint64_t fixed_comma_setpoint= *((uint64_t *)data);
-    	setpoint = ((double)fixed_comma_setpoint)/(0x100000000);
-    	printf("<-- id: %x   isr_cnt:%d\n", id, (int)isr_cnt);
-		printf("Setpoint = %g\n", setpoint);
+    /*Play with the setpoint over time*/
+	if(isr_cnt==1){
+		nexus_uC_pwm_enable_output(pwms[0], true);
+	} else if(isr_cnt<200){
+        setpoint = 4.0;
+    } else if(isr_cnt<600){
+        setpoint = 7.0;
+    } else {
+        setpoint = 4.0;
     }
 }
 
@@ -78,27 +78,37 @@ double PI(double error, double min, double max){
 	return out;
 }
 
+double debug_rise = 0.0;
+double debug_fall = 5e-6;
+
 void configure_hardware(void){
-	nexus_uC_timer_set_period(timer0, 10e-6);
+	//Configure timer
+	nexus_uC_timer_set_period(timer0, 100e-6);
 	nexus_uC_timer_add_interrupt_callback(timer0, nexus_uC_callback(&timer_isr));
 	nexus_uC_timer_enable(timer0, true);
 	nexus_uC_timer_enable_interrupt(timer0, true);
+
+	//Configure pwm
+    nexus_uC_pwm_set_period(pwms[0], period);
+    nexus_uC_pwm_enable(pwms[0], true);
+    nexus_uC_pwm_enable_interrupt(pwms[0], true);
+    nexus_uC_pwm_shadow_enable(pwms[0], true);
+    nexus_uC_pwm_add_interrupt_callback(pwms[0], nexus_uC_callback(&pwm_isr));
+
+    //Start pwm with 0 duty cycle
+    nexus_uC_pwm_set_rise(pwms[0], 0.0);
+    nexus_uC_pwm_set_fall(pwms[0], 0.0);
 }
 
 void timer_isr(void){
 
-	/*PI every switching cycle*/
-	duty_cycle = PI((setpoint-v_out), 0.0, 0.9);
-
 	/*Increment os tick counter*/
 	isr_cnt++;
+}
 
-	/*Report status to CAN*/
-	uint32_t id = 0xCAFE;
-	uint64_t * data = (uint64_t *)&v_out;
-	if(isr_cnt %10 == 0){
-		send_can_message(id, (const char *)data);
-		printf("--> id: %x   isr_cnt:%d\n", id, (int)isr_cnt);
-	}
-
+void pwm_isr(void){
+	/*PI every switching cycle*/
+	duty_cycle = PI((setpoint-v_out), 0.0, 0.9);
+	nexus_uC_pwm_set_fall(pwms[0], duty_cycle*period);
+	pwm_isr_cnt++;
 }
