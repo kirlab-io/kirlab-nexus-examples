@@ -84,16 +84,16 @@ double debug_fall = 5e-6;
 void configure_hardware(void){
 	//Configure timer
 	nexus_uC_timer_set_period(timer0, 100e-6);
-	nexus_uC_timer_add_interrupt_callback(timer0, nexus_uC_callback(&timer_isr));
+	nexus_uC_timer_add_event_callback(timer0, nexus_uC_callback(&timer_isr));
 	nexus_uC_timer_enable(timer0, true);
-	nexus_uC_timer_enable_interrupt(timer0, true);
+	nexus_uC_timer_enable_event(timer0, true);
 
 	//Configure pwm
     nexus_uC_pwm_set_period(pwms[0], period);
     nexus_uC_pwm_enable(pwms[0], true);
-    nexus_uC_pwm_enable_interrupt(pwms[0], true);
+    nexus_uC_pwm_enable_event(pwms[0], true);
     nexus_uC_pwm_shadow_enable(pwms[0], true);
-    nexus_uC_pwm_add_interrupt_callback(pwms[0], nexus_uC_callback(&pwm_isr));
+    nexus_uC_pwm_add_event_callback(pwms[0], nexus_uC_callback(&pwm_isr));
 
     //Start pwm with 0 duty cycle
     nexus_uC_pwm_set_rise(pwms[0], 0.0);
