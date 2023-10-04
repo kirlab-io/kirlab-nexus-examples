@@ -16,7 +16,7 @@
 #define PROCESS_SLOT (1)
 
 /*Local process time*/
-double t;
+double t = 0.0;
 double period = 10e-6;
 
 
@@ -57,11 +57,11 @@ int main(int argc, char *argv[]) {
 	nexus_set_finished_callback(&simulation_finished);
     
 	
-	printf("nexus_pt %p", nexus_pt);
+	//printf("nexus_pt %p", nexus_pt);
     printf("Read from other process: \na.signal_0: %f\na.signal_1:  %f\n", a_signal_0, a_signal_1);
     printf("Local time: %f\n", t);
     printf("\n\n");
-    
+    nexus_sync(period/2);
 	
     while(1){
         

@@ -3,7 +3,7 @@
   enabled: true
 - alias: Controller
   command: .\units\controller_eclipse\Debug\eclipse_c.exe
-  enabled: true
+  enabled: false
 - alias: Power Simulation
   command: not supported by cmd line
   enabled: false

@@ -4,7 +4,7 @@
   <c> CAUTION: DO NOT MODIFY THIS FILE !!! </c>
   <c>     ...if you don't know how...      </c>
   <c>======================================</c>
-  <Version ver="3" rev="9" core="51" build="69" date="08/25/2023" ID="1987918768" />
+  <Version ver="3" rev="9" core="51" build="69" date="08/25/2023" ID="1670694832" />
   <Doc>
     <Cir mode="2">
       <Cmps>
@@ -20,7 +20,7 @@
         <Cmp type="V_VM" id="23" name="V5" descr="" view="0" node0="0" node1="10" model="Voltmeter" />
         <Cmp type="V_VM" id="24" name="V6" descr="" view="0" node0="0" node1="11" model="Voltmeter" />
         <Cmp type="V_VM" id="36" name="V10" descr="" view="0" node0="0" node1="2" model="Voltmeter" />
-        <Cmp type="X_DLL" id="5" name="X1" descr="" view="0" node0="1" node1="3" node2="4" node3="5" node4="2" model="DLL" dll="nl5.dll" dll_init="Init" dll_code="Main" dll_pause="Pause" dll_exit="Exit" ic="">
+        <Cmp type="X_DLL" id="5" name="X1" descr="" view="0" node0="1" node1="3" node2="4" node3="5" node4="2" model="DLL" dll="C%3a%5cUsers%5ccesar%5cdev%5cgit%5ckirlab-nexus-examples%5cexamples%5cbuck_control%5cunits%5cbuck_model%5cnl5.dll" dll_init="Init" dll_code="Main" dll_pause="Pause" dll_exit="Exit" ic="">
           <Custom w="2" h="4" l="15" r="1" b="0" t="0" d="true">
             <Ins>
               <In name="x1" />
@@ -46,7 +46,7 @@
       <Sheets activeSheet="0">
         <Sheet name="Sheet1">
           <VC size="22" center_x="-5.10956943634" center_y="-3.50078995668" />
-          <Curs p="7,-5" dir="-1" />
+          <Curs p="7,-4" dir="-1" />
           <Pcts>
             <Pct type="label" id="14" dir="0" mir="0" p="-3,-6" text0="16,-24" text1="16,24" textdir="0" />
             <Pct type="label" id="14" dir="0" mir="0" p="-3,-6" text0="16,-24" text1="16,24" textdir="0" />
@@ -141,7 +141,7 @@
       <Settings start="0" screen="100e-3" step="100e-9" pause_trigger="false" pause_trigger_f="" start_trigger="false" start_trigger_f="" />
       <Window>
         <Win visible="true" floating="false">
-          <Normal state="0" left="268" top="207" width="974" height="589" />
+          <Normal state="0" left="463" top="466" width="974" height="589" />
           <Floating monitor="0" state="0" left="1030" top="246" width="974" height="637" />
         </Win>
         <Attributes numbers="true" names="true" annotations="false" vert_grid="true" hor_grid="true" cursors="true" interval="0" left="5.70214691616e-3" right="51.1904761905e-3" vert_grid_fixed="false" clip_separated="false" grid_separated="false" />
@@ -169,7 +169,7 @@
       </Table>
       <Screen status_panels="7" table_height="120" />
       <Math manual="false" />
-      <Log>Transient+log%0aStarted+%3a+9%2f12%2f2023+7%3a51%3a25+PM%0aFile+%3a+C%3a%5cUsers%5ccesar%5cdev%5cgit%5ckirlab-nexus-examples%5cexamples%5cbuck_uC_PWM%5cunits%5cbuck_model%5cbuck.nl5</Log>
+      <Log>Transient+log%0aStarted+%3a+10%2f5%2f2023+12%3a01%3a25+AM%0aFile+%3a+C%3a%5cUsers%5ccesar%5cdev%5cgit%5ckirlab-nexus-examples%5cexamples%5cbuck_uC_PWM%5cunits%5cbuck_model%5cbuck.nl5%0aTransient+error%3a%0at%3d0%0aX1+%3a+DLL+writes+above+data+array+bounds%0a</Log>
       <AnalogWindows Maximized="false">
         <AnalogWindow ratio="1" separated="false" />
       </AnalogWindows>
@@ -219,7 +219,7 @@
     </Freq>
     <Advanced dc="true" sbs="false" to="0" zero="1e-12" ise="false" z0re="50" z0im="0" zparam="" cs="false" s_m="1" s_fs="500e-3" s_ff="1" s_os="125e-3" s_of="250e-3" s_as="15.625e-3" s_af="125e-3" s_cs="125e-3" s_cf="250e-3" so="true" low="0" high="5" thr="2.5" />
     <Libraries />
-    <Properties title="No+title" revision="1.0" author="Jonatan+R.+Fischer" project="Unknown" organization="Wallbox+Chargers+S.L." comments="" created="7%2f20%2f2023+8%3a39%3a42+PM" modified="9%2f12%2f2023+7%3a43%3a55+PM" save="0" />
+    <Properties title="No+title" revision="1.0" author="Jonatan+R.+Fischer" project="Unknown" organization="Wallbox+Chargers+S.L." comments="" created="7%2f20%2f2023+8%3a39%3a42+PM" modified="10%2f4%2f2023+11%3a01%3a59+PM" save="0" />
     <CS type="1" x="0" active="true">
       <Win visible="false" floating="false">
         <Normal state="0" left="0" top="0" width="0" height="0" />

@@ -5,8 +5,8 @@
   command: .\units\processA\a.exe
   enabled: true
 - alias: process B
-  command: .\units\processB\b.exe
+  command: asdf
   enabled: true
 - alias: process C python
   command: py .\units\processCpy\c.py
-  enabled: true
+  enabled: false

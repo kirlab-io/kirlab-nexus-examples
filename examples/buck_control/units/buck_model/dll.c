@@ -12,6 +12,8 @@
 
 #include "nexus.h"
 
+
+
 /*in and out from nexus*/
 extern double * in;
 extern double * out;
@@ -24,7 +26,9 @@ const int unit_slot = 0;
 const int in_size = 4;
 const int out_size = 2;
 
-/*Exported functions*/
+/*Callbacks*/
+void init(void){}
+
 void write_data(void){
     nexus_pt->plant.v_in= in[0];
     nexus_pt->plant.i_in= in[1];

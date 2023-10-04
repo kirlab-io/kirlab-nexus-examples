@@ -1,13 +1,15 @@
-build: clean main.exe clean_artifacts
-
 LIB ?= $(KLNEXUS_PATH)/lib
+INCLUDE ?= $(KLNEXUS_PATH)/include
 SHARED ?= ../../shared
+UNIT_NAME ?= example
 
-main.exe: main.o
-	gcc -L$(LIB) -lnexus main.o -o main.exe
+build: clean $(UNIT_NAME).exe clean_artifacts
 
-main.o: main.c
-	gcc -I$(LIB) -I$(SHARED) -c main.c -o main.o
+$(UNIT_NAME).exe: $(UNIT_NAME).o
+	gcc -L$(LIB) -lnexus $(UNIT_NAME).o -o $(UNIT_NAME).exe
+
+$(UNIT_NAME).o: $(UNIT_NAME).c
+	gcc -I$(INCLUDE) -I$(SHARED) -c $(UNIT_NAME).c -o $(UNIT_NAME).o
 
 clean_artifacts:
 	rm -f *.o

@@ -10,6 +10,7 @@
 SRC ?= dll.c
 OUT_DIR ?= .
 LIB ?= $(KLNEXUS_PATH)/lib
+INCLUDE ?= $(KLNEXUS_PATH)/include
 SHARED ?= ../../shared
 
 help:
@@ -36,7 +37,7 @@ psim.dll: $(SRC:.c=.o)
 	gcc -shared -L$(LIB) -lnexus_psim -lnexus $(SRC:.c=.o) -o $(OUT_DIR)/psim.dll
 
 $(SRC:.c=.o): $(SRC)
-	gcc -I$(LIB) -I$(SHARED) -c $(SRC) -o $(SRC:.c=.o)
+	gcc -I$(INCLUDE) -I$(SHARED) -c $(SRC) -o $(SRC:.c=.o)
 
 clean_artifacts:
 	rm -f *.o

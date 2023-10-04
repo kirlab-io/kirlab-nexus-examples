@@ -10,6 +10,7 @@
 SRC ?= dll.c
 OUT_DIR ?= .
 LIB ?= $(KLNEXUS_PATH)/lib
+INCLUDE ?= $(KLNEXUS_PATH)/include
 SHARED ?= ../../shared
 
 help:
@@ -30,13 +31,13 @@ nl5: clean nl5.dll clean_artifacts
 psim: clean psim.dll clean_artifacts
 
 nl5.dll: $(SRC:.c=.o)
-	gcc -shared -L$(LIB) -lnexus_nl5 -lnexus  $(SRC:.c=.o) -lnexusuc -o $(OUT_DIR)/nl5.dll
+	gcc -shared -L$(LIB) -lnexus_nl5 -lnexus $(SRC:.c=.o) -o $(OUT_DIR)/nl5.dll
 
 psim.dll: $(SRC:.c=.o)
-	gcc -shared -L$(LIB) -lnexus_psim -lnexus  $(SRC:.c=.o) -lnexusuc -o $(OUT_DIR)/psim.dll
+	gcc -shared -L$(LIB) -lnexus_psim -lnexus $(SRC:.c=.o) -o $(OUT_DIR)/psim.dll
 
 $(SRC:.c=.o): $(SRC)
-	gcc -I$(LIB) -I$(SHARED) -c $(SRC) -o $(SRC:.c=.o)
+	gcc -I$(INCLUDE) -I$(SHARED) -c $(SRC) -o $(SRC:.c=.o)
 
 clean_artifacts:
 	rm -f *.o

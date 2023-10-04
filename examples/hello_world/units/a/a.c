@@ -16,7 +16,7 @@
 #define PROCESS_SLOT (0)
 
 /*Local process time*/
-double t;
+double t = 0.0;
 double period = 10e-6;
 
 
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     printf("Read from other process: \nb.signal_0: %f\nb.signal_1:  %f\n", b_signal_0, b_signal_1);
     printf("Local time: %f\n", t);
     printf("\n\n");
-    
+    nexus_sync(period/2);
 	
     while(1){
         t = t+period;
