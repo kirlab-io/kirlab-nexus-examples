@@ -1,6 +1,6 @@
 /*
 =========================================================================
-* Copyright (C) 2023 Kirlab
+* Copyright (C) 2024 Kirlab
 * All rights reserved.
 *
 * This file is part of KirLab Nexus.
@@ -19,15 +19,13 @@ extern double * in;
 extern double * out;
 
 /*Exported values*/
-const char * get_shared_id(void){
-	return NEXUS_SHARED_ID;
-}
-const int unit_slot = 0;
 const int in_size = 4;
 const int out_size = 2;
 
 /*Callbacks*/
-void init(void){}
+void init(void){
+    (void)nexus_init(0, NEXUS_SHARED_ID);
+}
 
 void write_data(void){
     nexus_pt->plant.v_in= in[0];

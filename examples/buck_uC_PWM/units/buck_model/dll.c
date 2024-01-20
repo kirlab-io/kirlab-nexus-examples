@@ -1,6 +1,6 @@
 /*
 =========================================================================
-* Copyright (C) 2023 Kirlab
+* Copyright (C) 2024 Kirlab
 * All rights reserved.
 *
 * This file is part of KirLab Nexus.
@@ -23,10 +23,6 @@ extern double * in;
 extern double * out;
 
 /*Exported values*/
-const char * get_shared_id(void){
-	return NEXUS_SHARED_ID;
-}
-const int unit_slot = 0;
 const int in_size = 4;
 const int out_size = 1;
 
@@ -37,6 +33,9 @@ void * nexus_uC_pwm_aux_create(void);
 
 /*Callbacks*/
 void init(void){
+    (void)nexus_init(0, NEXUS_SHARED_ID);
+
+    //Connect pwms to shared memory
 	for(int i=0; i<sizeof(pwms)/sizeof(pwms[0]); i++){
         pwms[i] = nexus_uC_pwm_aux_create();
         nexus_uC_pwm_aux_set_shared_object(pwms[i], (void *)&nexus_pt->pwm_links[i]);
@@ -56,9 +55,9 @@ void read_data(void){
 		nexus_uC_pwm_aux_load_shared(pwms[i]);
 	
 }
-
+	
 void finished(void){
-	//nothing to do, let the program run
+    //Do something at the end of the simulation...
 }
 
 void processing(void){
