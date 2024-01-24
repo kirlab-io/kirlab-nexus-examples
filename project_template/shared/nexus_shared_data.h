@@ -17,16 +17,16 @@ static const char * NEXUS_SHARED_ID = "SAMPLE_PROJECT";
 typedef struct{
     volatile double signal_0;
     volatile double signal_1;
-} Signal_block_a_t;
+} SignalBlockA;
 
 typedef struct{
     volatile double signal_0;
     volatile double signal_1;
-} Signal_block_b_t;
+} SignalBlockB;
 
 typedef struct{
-    Signal_block_a_t a;
-    Signal_block_b_t b;
-} Nexus_shared_data_t;
+    SignalBlockA a;
+    SignalBlockB b;
+} NexusSharedData;
 
 #endif

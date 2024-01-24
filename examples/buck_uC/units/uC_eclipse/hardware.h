@@ -21,18 +21,18 @@ typedef void (*callback_t)(void);
 typedef struct{
     int num_callbacks;
     callback_t callbacks[NEXUS_UC_EVENT_MAX_CALLBACKS];
-} NexusuCEventGenerator_t;
+} NexusuCEventGenerator;
 
 typedef struct{
     double cnt;
     double limit;
     bool int_enable;
     bool enabled;
-    NexusuCEventGenerator_t event_generator;
-} NexusuCTimer_t;
+    NexusuCEventGenerator event_generator;
+} NexusuCTimer;
 
 
-extern NexusuCTimer_t * timer0;
+extern NexusuCTimer * timer0;
 
 void create_hardware(void);
 

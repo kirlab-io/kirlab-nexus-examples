@@ -19,11 +19,11 @@ typedef struct{
     volatile double v_out;
     volatile double i_in;
     volatile double i_out;
-} Power_plant_signals_t;
+} PowerPlantSignals;
 
 typedef struct{
-    Power_plant_signals_t plant;
-	NexusuCPwmLink_t pwm_links[1];
-} Nexus_shared_data_t;
+    PowerPlantSignals plant;
+	NexusuCPwmLink pwm_links[1];
+} NexusSharedData;
 
 #endif

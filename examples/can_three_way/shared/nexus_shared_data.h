@@ -19,6 +19,6 @@ typedef struct{
 	NexusCanAdapter can1;
 	NexusCanAdapter can2;
 	NexusCanBus bus0;
-} Nexus_shared_data_t;
+} NexusSharedData;
 
 #endif

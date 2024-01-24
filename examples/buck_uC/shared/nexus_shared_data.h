@@ -19,16 +19,16 @@ typedef struct{
     volatile double v_out;
     volatile double i_in;
     volatile double i_out;
-} Power_plant_signals_t;
+} PowerPlantSignals;
 
 typedef struct{
     volatile double period;
     volatile double duty_cycle;
-} Controller_signals_t;
+} ControllerSignals;
 
 typedef struct{
-    Power_plant_signals_t plant;
-    Controller_signals_t controller;
-} Nexus_shared_data_t;
+    PowerPlantSignals plant;
+    ControllerSignals controller;
+} NexusSharedData;
 
 #endif

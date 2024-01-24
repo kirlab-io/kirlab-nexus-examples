@@ -20,6 +20,6 @@ typedef struct{
     double requested_amplitude;
     double measured_frequency;
     double measured_amplitude;
-} Nexus_shared_data_t;
+} NexusSharedData;
 
 #endif
